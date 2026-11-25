@@ -1,0 +1,70 @@
+name: NOVA Unity project preflight
+
+on:
+  push:
+    branches:
+      - nova-engine-6-import
+    paths:
+      - 'Packages/**'
+      - 'ProjectSettings/**'
+      - 'Assets/**'
+      - '.github/workflows/nova-project-preflight.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    name: Validate Unity project bootstrap
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+        with:
+          ref: nova-engine-6-import
+
+      - name: Validate project structure and package metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f ProjectSettings/ProjectVersion.txt
+          grep -q '^m_EditorVersion: 6000\.0\.85f2$' ProjectSettings/ProjectVersion.txt
+          test -f Packages/manifest.json
+          test -d Assets
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifest = json.loads(Path("Packages/manifest.json").read_text(encoding="utf-8"))
+          if not isinstance(manifest.get("dependencies"), dict):
+              raise SystemExit("Packages/manifest.json must contain a dependencies object")
+
+          packages_dir = Path("Packages")
+          package_dirs = sorted(p for p in packages_dir.iterdir() if p.is_dir() and (p / "package.json").is_file())
+          expected = {
+              "com.nova.engine6.core",
+              "com.nova.engine6.graphics",
+              "com.nova.engine6.physics",
+              "com.nova.engine6.ai",
+              "com.nova.engine6.world",
+              "com.nova.engine6.audio",
+              "com.nova.engine6.input",
+              "com.nova.engine6.ui",
+              "com.nova.engine6.developertools",
+          }
+          actual = set()
+          for folder in package_dirs:
+              data = json.loads((folder / "package.json").read_text(encoding="utf-8"))
+              name = data.get("name")
+              if not name or name in actual:
+                  raise SystemExit(f"Missing or duplicate package name in {folder}")
+              if data.get("unity") != "6000.0":
+                  raise SystemExit(f"Unexpected Unity compatibility marker in {folder}")
+              actual.add(name)
+
+          if actual != expected:
+              raise SystemExit(f"Package set mismatch. Missing={sorted(expected-actual)} Extra={sorted(actual-expected)}")
+          print(f"PASS: Unity project bootstrap and {len(actual)} embedded NOVA package manifests validated.")
+          print("NOTE: This is metadata validation only; it does not run Unity Editor or compile C#.")
+          PY
