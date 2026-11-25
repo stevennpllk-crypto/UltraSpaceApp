@@ -1,0 +1,10 @@
+{
+  "name": "com.nova.engine6.developertools",
+  "version": "1.2.0",
+  "displayName": "NOVA ENGINE 6 - Developer Tools",
+  "description": "Project setup and validation tools for Unity 6 projects.",
+  "unity": "6000.0",
+  "author": {
+    "name": "NOVA ENGINE 6"
+  }
+}
