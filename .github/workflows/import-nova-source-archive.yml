@@ -1,0 +1,62 @@
+name: Import NOVA source archive
+
+on:
+  push:
+    branches: [nova-engine-6-import]
+    paths:
+      - "NOVA_ENGINE_6_v1.2.0_Source.zip"
+      - ".github/workflows/import-nova-source-archive.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+
+      - name: Validate and extract source archive
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import shutil
+
+          archive = Path("NOVA_ENGINE_6_v1.2.0_Source.zip")
+          if not archive.is_file():
+              raise SystemExit("Upload NOVA_ENGINE_6_v1.2.0_Source.zip to the repository branch first.")
+
+          with ZipFile(archive) as z:
+              names = z.namelist()
+              for name in names:
+                  target = (Path.cwd() / name).resolve()
+                  if not target.is_relative_to(Path.cwd().resolve()):
+                      raise SystemExit(f"Unsafe archive path: {name}")
+              cs_count = sum(name.endswith(".cs") for name in names)
+              manifests = [n for n in names if n.startswith("Packages/com.nova.engine6.") and n.endswith("/package.json")]
+              if cs_count != 58:
+                  raise SystemExit(f"Expected 58 C# files, found {cs_count}")
+              if len(manifests) != 9:
+                  raise SystemExit(f"Expected 9 package manifests, found {len(manifests)}")
+              z.extractall(Path.cwd())
+
+          archive.unlink()
+          print(f"Extracted {cs_count} C# files and {len(manifests)} package manifests.")
+          PY
+
+      - name: Commit extracted NOVA source
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A Packages BUILD_STATUS.txt README_AR.md release.json NOVA_ENGINE_6_v1.2.0_Source.zip
+          if git diff --cached --quiet; then
+            echo "No source changes to commit."
+          else
+            git commit -m "feat: import NOVA ENGINE 6 v1.2.0 source packages"
+            git push
+          fi
