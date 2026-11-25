@@ -5,6 +5,6 @@
   "description": "World generation, day/night, weather, procedural placement and distance-based chunk activation for Unity 6.",
   "unity": "6000.0",
   "author": {
-    "name": "NOVA ENGINE 6"
+    "name": "NOVA ENGINE"
   }
 }

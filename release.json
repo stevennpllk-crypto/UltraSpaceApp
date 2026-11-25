@@ -1,0 +1,15 @@
+{
+  "name": "NOVA ENGINE 6 Unified",
+  "version": "1.2.0",
+  "displayName": "NOVA ENGINE 6 - Unified Release",
+  "description": "Unified collection of NOVA ENGINE 6 foundational Unity packages.",
+  "unity": "6000.0",
+  "author": {
+    "name": "NOVA ENGINE"
+  },
+  "added": [
+    "Android build checklist",
+    "Project Setup Wizard",
+    "com.nova.engine6.developertools"
+  ]
+}

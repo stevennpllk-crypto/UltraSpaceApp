@@ -4,7 +4,5 @@
   "displayName": "NOVA ENGINE 6 Physics",
   "description": "Physics utilities built on Unity Physics for NOVA ENGINE 6.",
   "unity": "6000.0",
-  "author": {
-    "name": "NOVA ENGINE 6"
-  }
+  "author": { "name": "NOVA ENGINE" }
 }

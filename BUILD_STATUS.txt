@@ -1,0 +1,10 @@
+NOVA ENGINE 6 v1.2.0
+Package assembly: COMPLETED
+ZIP integrity check: COMPLETED
+Unity Editor compilation: NOT RUN
+Unity automated tests: NOT RUN
+Android APK build: NOT CREATED
+iOS IPA build: NOT CREATED
+
+Added Project Setup Wizard and Android setup checklist.
+The wizard must be tested inside Unity 6. No compatibility or build success is claimed.
