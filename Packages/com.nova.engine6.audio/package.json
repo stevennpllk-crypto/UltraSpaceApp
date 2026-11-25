@@ -1,0 +1,10 @@
+{
+  "name": "com.nova.engine6.audio",
+  "version": "0.7.0",
+  "displayName": "NOVA ENGINE 6 - Audio Systems",
+  "description": "Audio management, spatial audio helpers, music transitions and audio diagnostics for Unity 6.",
+  "unity": "6000.0",
+  "author": {
+    "name": "NOVA ENGINE 6"
+  }
+}
