@@ -1,0 +1,10 @@
+{
+  "name": "com.nova.engine6.graphics",
+  "version": "0.3.0",
+  "displayName": "NOVA ENGINE 6 Graphics",
+  "description": "Cross-platform graphics utilities and quality configuration for NOVA ENGINE 6.",
+  "unity": "6000.0",
+  "author": {
+    "name": "NOVA ENGINE 6"
+  }
+}
