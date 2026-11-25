@@ -1,0 +1,10 @@
+{
+  "name": "com.nova.engine6.input",
+  "version": "0.8.0",
+  "displayName": "NOVA ENGINE 6 - Input & Control Systems",
+  "description": "Cross-platform player input, touch controls, virtual joystick and camera look helpers for Unity 6.",
+  "unity": "6000.0",
+  "author": {
+    "name": "NOVA ENGINE 6"
+  }
+}
