@@ -24,3 +24,10 @@ A local v1.2.0 source archive is available and contains 58 C# files across the n
 - Android APK and iOS IPA have not been built.
 
 A successful manifest workflow must not be interpreted as a successful Unity build or a ready-to-install APK.
+
+
+## Automated source import path
+- Added .github/workflows/import-nova-source-archive.yml.
+- When the exact source ZIP is uploaded to the root of branch nova-engine-6-import, the workflow validates the archive (58 C# files and 9 package manifests), extracts it, and commits the source folders back to that branch.
+- This import workflow has not yet been triggered because the ZIP has not yet been uploaded to GitHub.
+- It only imports source files; it does not compile Unity or build an APK.
