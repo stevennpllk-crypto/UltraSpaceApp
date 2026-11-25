@@ -19,17 +19,25 @@ The manifest workflow validates package metadata (JSON validity, package names, 
 ## Cloud build environment selected
 - Selected service: Unity Build Automation (UBA).
 - UBA supports GitHub repositories, Android builds, and Unity 6000.0 LTS.
-- Setup plan: see `NOVA_ENGINE_6/CLOUD_BUILD_PLAN.md`.
+- Project editor version pinned: Unity 6000.0.85f2.
+- Setup plan: `NOVA_ENGINE_6/CLOUD_BUILD_PLAN.md`.
 - UBA account connection and build configuration: NOT YET DONE.
 
+## Project bootstrap
+- `Packages/manifest.json`: ADDED (empty dependencies; NOVA packages are embedded under Packages/).
+- `ProjectSettings/ProjectVersion.txt`: ADDED (Unity 6000.0.85f2).
+- `Assets/NOVA/README.md`: ADDED.
+- Unity Editor import / Package Manager validation: NOT RUN.
+- Startup scene and Android player settings: NOT YET ADDED OR VALIDATED.
+- The original source archive contained no authored scenes, prefabs, textures, audio, or other game content.
+
 ## Not yet verified
-- Complete Unity project structure: NOT READY (no `Assets/` or `ProjectSettings/` directories were found).
 - Unity Editor compilation: NOT RUN
 - Unity automated tests: NOT RUN
 - Android APK build: NOT CREATED
 - iOS IPA build: NOT CREATED
 
-The current repository contains the nine Unity package folders and source code, but it does not yet contain a complete Unity project structure. A Unity project must be assembled and compiled with a compatible Unity 6 Editor before an APK can be claimed ready.
+The repository now has a minimal Unity project bootstrap, but it is not yet a release-ready game project. The packages must be imported and compiled, and a valid startup scene plus Android settings must be added before the first APK build.
 
 ## Branch safety
 All import and planning work was committed to `nova-engine-6-import`. The `main` branch was not modified.
