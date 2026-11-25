@@ -1,0 +1,57 @@
+name: NOVA package manifest validation
+
+on:
+  push:
+    branches: [main, nova-engine-6-import]
+    paths:
+      - "Packages/**/package.json"
+      - ".github/workflows/nova-package-manifests.yml"
+  pull_request:
+    paths:
+      - "Packages/**/package.json"
+      - ".github/workflows/nova-package-manifests.yml"
+  workflow_dispatch:
+
+jobs:
+  validate-manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate NOVA package manifests
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifests = sorted(Path("Packages").glob("com.nova.engine6.*/package.json"))
+          if len(manifests) != 9:
+              raise SystemExit(f"Expected 9 NOVA manifests, found {len(manifests)}")
+
+          seen = set()
+          for path in manifests:
+              data = json.loads(path.read_text(encoding="utf-8"))
+              expected = path.parent.name
+              if data.get("name") != expected:
+                  raise SystemExit(f"{path}: package name mismatch: {data.get('name')!r}")
+              if data.get("unity") != "6000.0":
+                  raise SystemExit(f"{path}: expected Unity 6000.0 compatibility marker")
+              if not data.get("version") or not data.get("displayName"):
+                  raise SystemExit(f"{path}: version/displayName missing")
+              if data["name"] in seen:
+                  raise SystemExit(f"Duplicate package name: {data['name']}")
+              seen.add(data["name"])
+              print(f"PASS {data['name']} {data['version']}")
+
+          print(f"Validated {len(manifests)} NOVA package manifests.")
+          PY
+
+      - name: Report validation scope
+        run: echo "Manifest metadata only. This workflow does not compile Unity C# or build APK/IPA."
