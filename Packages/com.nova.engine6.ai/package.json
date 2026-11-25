@@ -1,0 +1,10 @@
+{
+  "name": "com.nova.engine6.ai",
+  "version": "0.5.0",
+  "displayName": "NOVA ENGINE 6 AI",
+  "description": "Extensible gameplay AI systems for NOVA ENGINE 6.",
+  "unity": "6000.0",
+  "author": {
+    "name": "NOVA ENGINE 6"
+  }
+}
