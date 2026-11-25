@@ -1,0 +1,10 @@
+{
+  "name": "com.nova.engine6.physics",
+  "version": "0.4.0",
+  "displayName": "NOVA ENGINE 6 Physics",
+  "description": "Physics utilities built on Unity Physics for NOVA ENGINE 6.",
+  "unity": "6000.0",
+  "author": {
+    "name": "NOVA ENGINE 6"
+  }
+}
