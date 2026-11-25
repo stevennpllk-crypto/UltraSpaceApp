@@ -3,31 +3,26 @@
 Repository: stevennpllk-crypto/UltraSpaceApp
 Working branch: nova-engine-6-import
 
-## Added to this branch
-- Nine Unity Package Manager manifests under Packages/.
-- GitHub Actions workflow: .github/workflows/nova-package-manifests.yml
-- Repository handoff documentation under NOVA_ENGINE_6/.
-- Arabic import and Android build guide: NOVA_ENGINE_6/IMPORT_GUIDE_AR.md
-- Source inventory and local archive SHA-256: NOVA_ENGINE_6/SOURCE_INVENTORY.md
+## Source import
+- Source archive upload: COMPLETED
+- GitHub Actions import workflow run #2 (run ID 45691015553): SUCCESS
+- Imported C# source files: 58
+- Package manifests: 9
+- Recursive repository tree verification: 110 entries; 58 C# files and 9 package manifests found.
+- Source import commit: 7146de8ff0f058778a69a1b617ed0574dd82c9fb
 
-## CI result
-GitHub Actions run #1 (run ID 45687412504) completed with conclusion SUCCESS.
-All steps in the validate-manifests job completed successfully.
+## CI scope
+The import workflow validated the archive, checked for 58 C# files and 9 package manifests, extracted the source, and committed it to this branch. This confirms source import only.
 
-Scope: JSON validity, package names, version/displayName fields, duplicate names, and the Unity 6000.0 compatibility marker. This is metadata validation only; it is not a Unity C# compilation or runtime test.
-
-## Source payload status
-A local v1.2.0 source archive is available and contains 58 C# files across the nine packages. Its SHA-256 and source inventory are documented in SOURCE_INVENTORY.md. The archive and C# files have NOT yet been committed to this repository.
+The manifest workflow validates package metadata (JSON validity, package names, version/displayName fields, duplicate names, and the Unity 6000.0 compatibility marker). Metadata validation is not a Unity C# compilation or runtime test.
 
 ## Not yet verified
-- Unity Editor compilation and Unity automated tests have not been run.
-- Android APK and iOS IPA have not been built.
+- Unity Editor compilation: NOT RUN
+- Unity automated tests: NOT RUN
+- Android APK build: NOT CREATED
+- iOS IPA build: NOT CREATED
 
-A successful manifest workflow must not be interpreted as a successful Unity build or a ready-to-install APK.
+The current repository contains the nine Unity package folders and source code, but it does not yet contain a complete Unity project structure (no Assets/ or ProjectSettings/ directories were found). A Unity project must be assembled and compiled with a compatible Unity 6 Editor before an APK can be claimed ready.
 
-
-## Automated source import path
-- Added .github/workflows/import-nova-source-archive.yml.
-- When the exact source ZIP is uploaded to the root of branch nova-engine-6-import, the workflow validates the archive (58 C# files and 9 package manifests), extracts it, and commits the source folders back to that branch.
-- This import workflow has not yet been triggered because the ZIP has not yet been uploaded to GitHub.
-- It only imports source files; it does not compile Unity or build an APK.
+## Branch safety
+All import work was committed to nova-engine-6-import. The main branch was not modified.
