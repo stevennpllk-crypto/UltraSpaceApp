@@ -90,4 +90,4 @@ This inventory was generated from the local source archive:
 
 ## Upload and verification status
 
-The inventory describes the local archive, not the current GitHub checkout. The nine package manifests are in the repository, but the 58 C# source files are not yet committed there. The archive has not been compiled by Unity. The SHA-256 value above can be used to verify an independently transferred copy.
+The 58 C# source files and nine package manifests have now been imported into the GitHub branch nova-engine-6-import. The uploaded ZIP archive SHA-256 was 4a497d37473dfb435dfa9034d09fe243b28fa79f1031b649cc7bf0e5833c4ded. The source has not yet been compiled by Unity; successful import does not establish C# compilation or APK readiness. The tar.gz SHA-256 above identifies the separately generated tar.gz archive.
