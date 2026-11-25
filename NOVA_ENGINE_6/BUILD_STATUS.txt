@@ -1,0 +1,11 @@
+NOVA ENGINE 6 - repository handoff status
+
+Git branch: nova-engine-6-import
+Documentation handoff: prepared
+Original binary ZIP payload: NOT uploaded
+Unity compilation: NOT RUN
+Unity automated tests: NOT RUN
+Android APK: NOT CREATED
+iOS IPA: NOT CREATED
+
+Reason: the connected GitHub actions available in this session expose text-file commits but no direct binary archive upload action.
