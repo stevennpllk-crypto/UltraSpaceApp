@@ -22,12 +22,14 @@ The manifest workflow validates package metadata (JSON validity, package names, 
 - Project editor version pinned: Unity 6000.0.85f2.
 - Setup plan: `NOVA_ENGINE_6/CLOUD_BUILD_PLAN.md`.
 - UBA account connection and build configuration: NOT YET DONE.
+- GitHub preflight workflow: ADDED at `.github/workflows/nova-project-preflight.yml`; it checks project bootstrap files and the nine embedded package manifests. No run result has been confirmed yet.
 
 ## Project bootstrap
 - `Packages/manifest.json`: ADDED (empty dependencies; NOVA packages are embedded under Packages/).
 - `ProjectSettings/ProjectVersion.txt`: ADDED (Unity 6000.0.85f2).
 - `Assets/NOVA/README.md`: ADDED.
 - Unity Editor import / Package Manager validation: NOT RUN.
+- GitHub static project preflight: workflow added; execution/result NOT YET CONFIRMED.
 - Startup scene and Android player settings: NOT YET ADDED OR VALIDATED.
 - The original source archive contained no authored scenes, prefabs, textures, audio, or other game content.
 
